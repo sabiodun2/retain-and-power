@@ -9,26 +9,26 @@ const BUBBLE_BG = "#1F2C34";
 const SENT_BG = "#005C4B";
 
 const BOT_NAME = "Retain & Power";
-const BOT_AVATAR = "⚡";
+const BOT_AVATAR = "/whatsapp.png"; // Replace with your bot avatar image path
 
 const FLOWS = {
   idle: [
-    { from: "bot", text: "👋 Welcome, Merchant! I'm your *Retain & Power* assistant.\n\nI help you retain customers & save on energy costs.\n\nType *LOG* to record a sale, or *REPORT* to see your dashboard.", delay: 500 }
+    { from: "bot", text: "Welcome, Merchant! I'm your *Retain & Power* assistant.\n\nI help you retain customers & save on energy costs.\n\nType *LOG* to record a sale, or *REPORT* to see your dashboard.", delay: 500 }
   ],
   log: [
-    { from: "bot", text: "📦 *New Sale Logger*\n\nSend your sale in this format:\n`New Sale / Amount / Product / Customer Phone`\n\nExample:\n`New Sale / ₦18,000 / Ankara Gown / 08031234567`", delay: 400 }
+    { from: "bot", text: " *New Sale Logger*\n\nSend your sale in this format:\n`New Sale / Amount / Product / Customer Phone`\n\nExample:\n`New Sale / ₦18,000 / Ankara Gown / 08031234567`", delay: 400 }
   ],
   sale_logged: (amount, product, phone) => [
-    { from: "bot", text: `✅ *Sale Recorded!*\n\n📦 Product: ${product}\n💰 Amount: ${amount}\n📱 Customer: ${phone}\n\n_Customer added to your retention pipeline. If they don't return in 45 days, we'll send them a personalised loyalty message automatically._`, delay: 600 }
+    { from: "bot", text: `*Sale Recorded!*\n\n Product: ${product}\n Amount: ${amount}\n Customer: ${phone}\n\n_Customer added to your retention pipeline. If they don't return in 45 days, we'll send them a personalised loyalty message automatically._`, delay: 600 }
   ],
   report: [
-    { from: "bot", text: "📊 *Your Business Dashboard*\n\n👥 Active Customers: *47*\n🔁 Retention Rate: *68%*\n💰 CAC Saved This Month: *₦170,000*\n⚡ Energy Cost (Bulk Rate): *₦310,000*\n\n_You're saving ₦140,000/month on energy vs. retail pump pricing._\n\nType *ENERGY* to see your Energy Lock status.", delay: 500 }
+    { from: "bot", text: "*Your Business Dashboard*\n\n👥 Active Customers: *47*\n🔁 Retention Rate: *68%*\n💰 CAC Saved This Month: *₦170,000*\n⚡ Energy Cost (Bulk Rate): *₦310,000*\n\n_You're saving ₦140,000/month on energy vs. retail pump pricing._\n\nType *ENERGY* to see your Energy Lock status.", delay: 500 }
   ],
   energy: [
-    { from: "bot", text: "⚡ *Energy Lock Facility*\n\nYour cluster (Yaba Commercial Hub) has *214 merchants* enrolled.\n\n🔒 Bulk Rate Locked: *₦850/litre*\n🏪 Retail Pump Price: *₦1,230/litre*\n📉 Your Savings: *31% below market*\n\n_Next bulk delivery: June 15, 2026_\n\nYour retention score: *⭐⭐⭐⭐ (87/100)* — Energy Lock access: *ACTIVE* ✅", delay: 600 }
+    { from: "bot", text: "*Energy Lock Facility*\n\nYour cluster (Yaba Commercial Hub) has *214 merchants* enrolled.\n\nBulk Rate Locked: *₦850/litre*\nRetail Pump Price: *₦1,230/litre*\nYour Savings: *31% below market*\n\n_Next bulk delivery: June 15, 2026_\n\nYour retention score: *⭐⭐⭐⭐ (87/100)* — Energy Lock access: *ACTIVE*", delay: 600 }
   ],
   unknown: [
-    { from: "bot", text: "🤖 I didn't quite get that.\n\nTry:\n• *LOG* — Record a new sale\n• *REPORT* — View your dashboard\n• *ENERGY* — Check Energy Lock status", delay: 300 }
+    { from: "bot", text: "I didn't quite get that.\n\nTry:\n• *LOG* — Record a new sale\n• *REPORT* — View your dashboard\n• *ENERGY* — Check Energy Lock status", delay: 300 }
   ]
 };
 
@@ -59,7 +59,7 @@ function Message({ msg }) {
     <div style={{ display: "flex", justifyContent: isBot ? "flex-start" : "flex-end", marginBottom: 6, alignItems: "flex-end", gap: 8 }}>
       {isBot && (
         <div style={{ width: 32, height: 32, borderRadius: "50%", background: DARK_GREEN, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 16, flexShrink: 0, marginBottom: 2 }}>
-          {BOT_AVATAR}
+          <img src={BOT_AVATAR} alt="Bot" style={{ width: 24, height: 24 }} />
         </div>
       )}
       <div style={{
@@ -95,7 +95,7 @@ function Dashboard() {
   ];
   return (
     <div style={{ padding: 16 }}>
-      <div style={{ color: "#E9EDEF", fontWeight: 700, fontSize: 15, marginBottom: 12 }}>📊 Live Dashboard</div>
+      <div style={{ color: "#E9EDEF", fontWeight: 700, fontSize: 15, marginBottom: 12 }}>Live Dashboard</div>
       <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10 }}>
         {metrics.map(m => (
           <div key={m.label} style={{ background: BUBBLE_BG, borderRadius: 12, padding: "12px 14px", borderLeft: `3px solid ${m.color}` }}>
@@ -106,10 +106,10 @@ function Dashboard() {
         ))}
       </div>
       <div style={{ background: BUBBLE_BG, borderRadius: 12, padding: 14, marginTop: 10 }}>
-        <div style={{ color: "#8696A0", fontSize: 11, marginBottom: 8 }}>⚡ Yaba Cluster Energy Lock</div>
+        <div style={{ color: "#8696A0", fontSize: 11, marginBottom: 8 }}> Yaba Cluster Energy Lock</div>
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
           <span style={{ color: "#E9EDEF", fontSize: 13 }}>214 merchants enrolled</span>
-          <span style={{ background: "#0d3d2a", color: GREEN, fontSize: 11, padding: "3px 10px", borderRadius: 20, fontWeight: 700 }}>ACTIVE ✅</span>
+          <span style={{ background: "#0d3d2a", color: GREEN, fontSize: 11, padding: "3px 10px", borderRadius: 20, fontWeight: 700 }}>ACTIVE</span>
         </div>
         <div style={{ marginTop: 8, background: "#0B141A", borderRadius: 8, height: 8, overflow: "hidden" }}>
           <div style={{ width: "87%", height: "100%", background: `linear-gradient(90deg, ${DARK_GREEN}, ${GREEN})`, borderRadius: 8 }} />
@@ -197,7 +197,7 @@ export default function App() {
 
       {/* Header */}
       <div style={{ background: "#1F2C34", padding: "12px 16px", display: "flex", alignItems: "center", gap: 12, position: "sticky", top: 0, zIndex: 10, boxShadow: "0 1px 3px rgba(0,0,0,0.4)" }}>
-        <div style={{ width: 40, height: 40, borderRadius: "50%", background: DARK_GREEN, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 20 }}>⚡</div>
+        <div style={{ width: 40, height: 40, borderRadius: "50%", background: DARK_GREEN, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 20 }}><img src={BOT_AVATAR} alt="Bot" style={{ width: 24, height: 24 }} /></div>
         <div style={{ flex: 1 }}>
           <div style={{ color: "#E9EDEF", fontWeight: 700, fontSize: 15 }}>Retain & Power</div>
           <div style={{ color: GREEN, fontSize: 12 }}>● Online — WhatsApp Business</div>
@@ -210,7 +210,7 @@ export default function App() {
               border: `1px solid ${tab === t ? GREEN : "#2a3942"}`,
               borderRadius: 20, padding: "4px 12px", fontSize: 12, cursor: "pointer", fontWeight: 600
             }}>
-              {t === "chat" ? "💬 Chat" : "📊 Dash"}
+              {t === "chat" ? "Chat" : "Dashboard"}
             </button>
           ))}
         </div>
@@ -241,7 +241,7 @@ export default function App() {
                 background: "transparent", border: `1px solid ${DARK_GREEN}`, color: GREEN,
                 borderRadius: 20, padding: "5px 14px", fontSize: 13, cursor: "pointer", whiteSpace: "nowrap", fontWeight: 600
               }}>
-                {s === "LOG" ? "📦 LOG" : s === "REPORT" ? "📊 REPORT" : "⚡ ENERGY"}
+                {s === "LOG" ? "LOG" : s === "REPORT" ? "REPORT" : "ENERGY"}
               </button>
             ))}
             <button onClick={() => handleSend("New Sale / ₦18,000 / Ankara Gown / 08031234567")} style={{
